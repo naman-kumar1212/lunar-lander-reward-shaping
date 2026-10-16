@@ -13,6 +13,7 @@ __pycache__/
 
 # TensorBoard logs (too large; track only CSVs)
 results/tensorboard/
+results/tb/
 
 # Large video files
 results/**/*.mp4
