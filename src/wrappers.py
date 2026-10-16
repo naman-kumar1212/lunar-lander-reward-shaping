@@ -102,7 +102,7 @@ class RewardShapingWrapper(gym.Wrapper):
 
     def step(self, action) -> Tuple[np.ndarray, float, bool, bool, Dict]:
         obs, reward, terminated, truncated, info = self.env.step(action)
-        shaped = self._apply_shaping(obs, reward)
+        shaped = self._apply_shaping(obs, reward, terminated=terminated)
         return obs, shaped, terminated, truncated, info
 
     # ------------------------------------------------------------------
@@ -123,7 +123,9 @@ class RewardShapingWrapper(gym.Wrapper):
             return coef
         return 0.0
 
-    def _apply_shaping(self, obs: np.ndarray, reward: float) -> float:
+    def _apply_shaping(
+        self, obs: np.ndarray, reward: float, terminated: bool = False
+    ) -> float:
         if self.variant == "baseline":
             return reward
 
@@ -142,8 +144,8 @@ class RewardShapingWrapper(gym.Wrapper):
             return reward
 
         if self.variant == "fix":
-            curr_phi = self._phi(obs)
-            # Potential-based: gamma * phi(s') - phi(s)
+            # For potential-based shaping (Ng et al., 1999), terminal state phi = 0
+            curr_phi = 0.0 if terminated else self._phi(obs)
             potential_bonus = GAMMA * curr_phi - self._prev_phi
             self._prev_phi = curr_phi
             fee = float(self.config.get("time_penalty", 0.02))
