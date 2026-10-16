@@ -1,0 +1,38 @@
+# Virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# TensorBoard logs (too large; track only CSVs)
+results/tensorboard/
+
+# Large video files
+results/**/*.mp4
+results/**/*.avi
+
+# Model files (large; push selectively)
+# results/**/*.zip
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets / tokens
+*.env
+.env
+secrets.json
+
+# IDE
+.vscode/
+.idea/
+
+# Pytest
+.pytest_cache/
