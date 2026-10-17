@@ -87,6 +87,12 @@ def parse_args():
         action="store_true",
         help="Use DummyVecEnv instead of SubprocVecEnv (fallback for Windows issues)",
     )
+    parser.add_argument(
+        "--output-dir",
+        type=str,
+        default="results",
+        help="Root directory for outputs (default: results)",
+    )
     return parser.parse_args()
 
 
@@ -95,7 +101,7 @@ def main():
 
     # ── Output directories ────────────────────────────────────────────────
     run_id = f"{args.variant}_s{args.seed}"
-    results_root = Path(__file__).parent.parent / "results"
+    results_root = Path(args.output_dir)
     monitor_dir = results_root / "monitor" / run_id
     model_path = results_root / "models" / f"{run_id}.zip"
     tb_log_dir = results_root / "tb"
