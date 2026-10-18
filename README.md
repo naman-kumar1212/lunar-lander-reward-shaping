@@ -18,7 +18,7 @@ The clip below demonstrates a **synchronized deterministic evaluation** of both 
   <img src="results/clips/comparison.gif" alt="Synchronized Comparison: Hack vs Fix" width="720"/>
 </p>
 
-* **Left (Variant C — Reward Hack):** The agent was given a $+1.0$ heuristic bonus for remaining upright and slow near the landing pad. It discovers a positive cycle: hovering indefinitely consumes slightly more fuel than idling, but continuously yields net-positive shaped reward. It **times out at 1,000 frames** without ever touching down ($0\%$ success rate).
+* **Left (Variant C — Reward Hack):** The agent was given a $+1.0$ heuristic bonus for remaining upright and slow near the landing pad. It discovers a positive cycle: hovering indefinitely consumes slightly more fuel than idling, but continuously yields net-positive shaped reward. It **times out at 1,000 frames** without ever touching down (0% success rate).
 * **Right (Variant D — PBRS Fix):** The agent receives the mathematically sound potential difference $F(s, a, s') = \gamma \Phi(s') - \Phi(s) - 0.02$. The potential telescopes over time, strictly preserving the optimal policy. It performs an efficient, gentle touchdown on the pad at **Frame 280 (+292.3 unshaped points)**.
 
 ---
